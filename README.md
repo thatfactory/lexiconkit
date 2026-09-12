@@ -1,2 +1,31 @@
-# lexiconkit
-Models and manages personal vocabulary collections, definitions, and learning metadata. 📖
+<p align="center">
+  <a href="https://developer.apple.com/swift/"><img alt="Swift Version" src="https://img.shields.io/badge/Swift-6.4-ea7a50.svg?logo=swift&logoColor=white"></a>
+  <a href="https://developer.apple.com/xcode/"><img alt="Xcode Version" src="https://img.shields.io/badge/Xcode-27-50ace8.svg?logo=xcode&logoColor=white"></a>
+  <a href="https://forums.swift.org/t/introducing-anyappleos/85728"><img alt="Platforms" src="https://img.shields.io/badge/AnyAppleOS-26%2B-lightgrey.svg?logo=apple&logoColor=white"></a>
+  <a href="https://developer.apple.com/documentation/xcode/swift-packages"><img alt="SPM" src="https://img.shields.io/badge/SPM-ready-b68f6a.svg?logo=gitlfs&logoColor=white"></a>
+  <a href="https://thatfactory.github.io/lexiconkit/documentation/lexiconkit/"><img alt="DocC" src="https://img.shields.io/badge/DocC-documentation-0288D1.svg?logo=bookstack&logoColor=white"></a>
+  <a href="https://en.wikipedia.org/wiki/MIT_License"><img alt="License" src="https://img.shields.io/badge/License-MIT-67ac5b.svg?logo=googledocs&logoColor=white"></a>
+  <a href="https://github.com/thatfactory/lexiconkit/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/thatfactory/lexiconkit/actions/workflows/ci.yml/badge.svg"></a>
+  <a href="https://github.com/thatfactory/lexiconkit/actions/workflows/release.yml"><img alt="Release" src="https://github.com/thatfactory/lexiconkit/actions/workflows/release.yml/badge.svg"></a>
+</p>
+
+# LexiconKit
+
+LexiconKit is a reusable, UI-agnostic domain package for personal vocabulary collections, definitions, provenance, lightweight metadata, and opaque references to host-owned media.
+
+The package is currently a bootstrapped foundation. Dictionary lookup, translation, exercises, persistence frameworks, synchronization, and UI remain outside its boundary.
+
+## Documentation
+
+API documentation is published with DocC after a GitHub release. See the [LexiconKit documentation](https://thatfactory.github.io/lexiconkit/documentation/lexiconkit/).
+
+## Requirements
+
+- Swift 6.4
+- Xcode 27
+- Apple platform versions shown in the badge above
+- Swift Package Manager
+
+## License
+
+LexiconKit is available under the MIT license. See [LICENSE](LICENSE).
