@@ -6,4 +6,5 @@ All notable changes to LexiconKit are documented here.
 
 ### Added
 
-- Bootstrapped the Swift package, DocC catalog, CI/CD workflows, shared AgentGuidelines integration, and repository policy.
+- Added persistence-friendly vocabulary entries, terms, definitions, provenance, tags, opaque asset references, and explicit timestamps.
+- Added Codable round-trip and identity tests for the complete vocabulary model.
