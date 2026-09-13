@@ -13,7 +13,20 @@
 
 LexiconKit is a reusable, UI-agnostic domain package for personal vocabulary collections, definitions, provenance, lightweight metadata, and opaque references to host-owned media.
 
-The package is currently a bootstrapped foundation. Dictionary lookup, translation, exercises, persistence frameworks, synchronization, and UI remain outside its boundary.
+LexiconKit provides persistence-friendly values for vocabulary entries, terms, definitions, definition provenance, tags, and opaque host-owned media references. Dictionary lookup, translation, exercises, persistence frameworks, synchronization, and UI remain outside its boundary.
+
+```swift
+let entry = LexiconEntry(
+    term: LexiconTerm(text: "Haus", languageCode: "de"),
+    definitions: [
+        LexiconDefinition(
+            text: "house",
+            languageCode: "en",
+            source: .user
+        )
+    ]
+)
+```
 
 ## Documentation
 
