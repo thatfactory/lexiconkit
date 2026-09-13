@@ -111,3 +111,4 @@ Replace these examples with exact repository paths:
 
 - Do not encode CEFR, product progression, CloudKit, or application-specific deduplication policy.
 - Store only opaque host-owned media references, never framework image objects or temporary URLs.
+- LexiconKit currently emits no runtime diagnostics because its public surface contains only pure domain values and initializers. Do not log value construction or vocabulary content. If a stateful or fallible lifecycle is added, route its diagnostics through a package-local `LexiconLogging` gateway with subsystem `com.thatfactory.lexiconkit` and canonical emoji 📖.

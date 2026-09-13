@@ -32,6 +32,10 @@ let entry = LexiconEntry(
 
 API documentation is published with DocC after a GitHub release. See the [LexiconKit documentation](https://thatfactory.github.io/lexiconkit/documentation/lexiconkit/).
 
+## Runtime diagnostics
+
+LexiconKit currently emits no runtime diagnostics. Its public surface contains only pure domain values and initializers; persistence, synchronization, validation workflows, and application lifecycle remain host responsibilities. Logging value construction would add noise and could expose vocabulary content. If the package later gains stateful or fallible runtime behavior, its diagnostics will use a package-local `LexiconLogging` gateway, subsystem `com.thatfactory.lexiconkit`, and the canonical 📖 prefix.
+
 ## Requirements
 
 - Swift 6.4
