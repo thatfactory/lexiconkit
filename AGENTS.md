@@ -30,6 +30,18 @@ Read only the guides relevant to the task:
 
 For an application that uses Redux, also read [Redux architecture](AgentGuidelines/Guidelines/Architecture/Redux.md).
 
+Keep the following observability contract in the consumer repository's root `AGENTS.md` so implementation agents treat runtime diagnostics as part of lifecycle work. Copy it unchanged and update it when the marker version changes in this template.
+
+```md
+<!-- BEGIN THATFACTORY RUNTIME OBSERVABILITY CONTRACT v1 -->
+## Runtime Observability
+
+Treat privacy-safe runtime observability as part of implementing or changing stateful, asynchronous, fallible, or lifecycle-oriented behavior. Identify the meaningful success, failure, cancellation, recovery, and state-transition boundaries before handoff, and emit concise AppLogger events owned by the artifact that implements them. Dependency declaration or target linkage alone does not satisfy this requirement.
+
+Every ThatFactory package log starts with its canonical emoji and uses its own stable subsystem. Never log credentials, account or record identifiers, share URLs, captured content, images, or other user-generated values as public metadata. Keep pure values and utilities silent when they have no meaningful diagnostic event; record that deliberate decision in the implementation handoff instead of adding initializer or property-access noise. Follow [Logging](AgentGuidelines/Guidelines/Logging.md) for ownership, privacy, severity, message design, and tests.
+<!-- END THATFACTORY RUNTIME OBSERVABILITY CONTRACT v1 -->
+```
+
 Keep the following marked external-dependency contract in the consumer repository's root `AGENTS.md` so implementation agents receive the rule directly before they make dependency choices. Copy it unchanged and update it when the marker version changes in this template.
 
 ```md
@@ -111,3 +123,4 @@ Replace these examples with exact repository paths:
 
 - Do not encode CEFR, product progression, CloudKit, or application-specific deduplication policy.
 - Store only opaque host-owned media references, never framework image objects or temporary URLs.
+- LexiconKit currently emits no runtime diagnostics because its public surface contains only pure domain values and initializers. Do not log value construction or vocabulary content. If a stateful or fallible lifecycle is added, route its diagnostics through a package-local `LexiconLogging` gateway with subsystem `com.thatfactory.lexiconkit` and canonical emoji 📖.
