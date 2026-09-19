@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 /// A textual explanation associated with a vocabulary entry.
 public struct LexiconDefinition: Identifiable, Codable, Hashable, Sendable {

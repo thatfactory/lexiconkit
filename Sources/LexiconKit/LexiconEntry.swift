@@ -1,4 +1,4 @@
-import Foundation
+public import Foundation
 
 /// A persistence-friendly vocabulary entry independent of storage and presentation frameworks.
 public struct LexiconEntry: Identifiable, Codable, Hashable, Sendable {
