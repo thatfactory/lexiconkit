@@ -4,6 +4,17 @@ All notable changes to LexiconKit are documented here.
 
 ## Unreleased
 
+## 0.3.0 — 2026-09-21
+
+### Added
+
+- Add a memory-mapped, language-neutral lexicon model reader with synchronous exact term and gloss lookup.
+- Add explicit model verification for CI and installed-resource integrity checks.
+
+### Changed
+
+- Adopt Agent Guidelines `0.0.34`.
+
 ## 0.2.0 — 2026-09-20
 
 ### Added

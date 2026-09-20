@@ -11,9 +11,9 @@
 
 # LexiconKit
 
-LexiconKit is a reusable, UI-agnostic domain package for personal vocabulary collections, definitions, provenance, lightweight metadata, and opaque references to host-owned media.
+LexiconKit is a reusable, UI-agnostic domain package for personal vocabulary collections and immutable lexical model lookup.
 
-LexiconKit provides persistence-friendly values for vocabulary entries, terms, optional grammatical gender, definitions, definition provenance, tags, and opaque host-owned media references. Dictionary lookup, translation, language-specific display articles, exercises, persistence frameworks, synchronization, and UI remain outside its boundary.
+LexiconKit provides persistence-friendly vocabulary values plus a synchronous, language-neutral reader for versioned packed lexicon artifacts. Translation, fuzzy or semantic inference, language-specific display articles, exercises, persistence frameworks, synchronization, and UI remain outside its boundary.
 
 ```swift
 let entry = LexiconEntry(
@@ -32,13 +32,27 @@ let entry = LexiconEntry(
 )
 ```
 
+Open a bundled model lazily and perform exact lemma or inflected-form lookup without deserializing the corpus:
+
+```swift
+let model = try LexiconModel(
+    contentsOf: modelURL,
+    manifestURL: manifestURL
+)
+let result = try model.matchSense(
+    for: "See",
+    gloss: "lake",
+    languageCodes: ["en"]
+)
+```
+
 ## Documentation
 
 API documentation is published with DocC after a GitHub release. See the [LexiconKit documentation](https://thatfactory.github.io/lexiconkit/documentation/lexiconkit/).
 
 ## Runtime diagnostics
 
-LexiconKit currently emits no runtime diagnostics. Its public surface contains only pure domain values and initializers; persistence, synchronization, validation workflows, and application lifecycle remain host responsibilities. Logging value construction would add noise and could expose vocabulary content. If the package later gains stateful or fallible runtime behavior, its diagnostics will use a package-local `LexiconLogging` gateway, subsystem `com.thatfactory.lexiconkit`, and the canonical 📖 prefix.
+LexiconKit logs privacy-safe model-open success and failure through its package-local gateway, subsystem `com.thatfactory.lexiconkit`, and canonical 📖 prefix. It never logs model paths, lookup terms, glosses, or vocabulary content. Individual lookups remain silent.
 
 ## Requirements
 
