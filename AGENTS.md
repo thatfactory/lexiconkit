@@ -30,9 +30,6 @@ Read only the guides relevant to the task:
 
 For an application that uses Redux, also read [Redux architecture](AgentGuidelines/Guidelines/Architecture/Redux.md).
 
-Keep the following observability contract in the consumer repository's root `AGENTS.md` so implementation agents treat runtime diagnostics as part of lifecycle work. Copy it unchanged and update it when the marker version changes in this template.
-
-```md
 <!-- BEGIN THATFACTORY RUNTIME OBSERVABILITY CONTRACT v1 -->
 ## Runtime Observability
 
@@ -40,11 +37,7 @@ Treat privacy-safe runtime observability as part of implementing or changing sta
 
 Every ThatFactory package log starts with its canonical emoji and uses its own stable subsystem. Never log credentials, account or record identifiers, share URLs, captured content, images, or other user-generated values as public metadata. Keep pure values and utilities silent when they have no meaningful diagnostic event; record that deliberate decision in the implementation handoff instead of adding initializer or property-access noise. Follow [Logging](AgentGuidelines/Guidelines/Logging.md) for ownership, privacy, severity, message design, and tests.
 <!-- END THATFACTORY RUNTIME OBSERVABILITY CONTRACT v1 -->
-```
 
-Keep the following marked external-dependency contract in the consumer repository's root `AGENTS.md` so implementation agents receive the rule directly before they make dependency choices. Copy it unchanged and update it when the marker version changes in this template.
-
-```md
 <!-- BEGIN THATFACTORY EXTERNAL DEPENDENCY CONTRACT v1 -->
 ## External Dependency Policy
 
@@ -58,11 +51,7 @@ Apple system frameworks and the Swift standard library are not third-party depen
 
 Follow [Development workflow](AgentGuidelines/Guidelines/Development.md) for the detailed policy.
 <!-- END THATFACTORY EXTERNAL DEPENDENCY CONTRACT v1 -->
-```
 
-Keep the following documentation-maintenance contract in the consumer repository's root `AGENTS.md` so implementation agents receive it directly rather than only through a linked guide. Copy it unchanged and update it when the marker version changes in this template.
-
-```md
 <!-- BEGIN THATFACTORY DOCUMENTATION MAINTENANCE CONTRACT v1 -->
 ## Documentation Maintenance
 
@@ -72,11 +61,7 @@ Update documentation when a change alters durable or core feature behavior or an
 
 Do not create documentation churn for incidental implementation details that are not durable and do not affect an existing documented claim. Follow [Documentation](AgentGuidelines/Guidelines/Documentation.md) for detailed scope and the completion checklist.
 <!-- END THATFACTORY DOCUMENTATION MAINTENANCE CONTRACT v1 -->
-```
 
-Keep the following marked code-review contract in the consumer repository's root `AGENTS.md` so it is loaded directly for root-level Codex and pull-request work. Copy it unchanged and update it when the marker version changes in this template; a Markdown link to the detailed workflow is not an instruction include.
-
-```md
 <!-- BEGIN THATFACTORY CODE REVIEW CONTRACT v2 -->
 ## Code Review Rules
 
@@ -98,16 +83,10 @@ Automatic Codex review is the initial Codex review. Do not request a manual Code
 ## Codex review scope
 
 For consumer pull requests, do not substantively review `AgentGuidelines/**` after exact tagged-tree provenance has been verified. Verify its `VERSION`, compare its tree with the matching central tag, and verify the required `.gitattributes` rule. If provenance does not match exactly, review the subtree contents and stop the merge. Report substantive guideline feedback against the central `agent-guidelines` pull request.
-```
-
-The marked block is intentional controlled duplication of the shared review policy. The tracked, synchronized subtree is reviewed centrally in `thatfactory/agent-guidelines`; the root-level instructions ensure the review contract and subtree scope are loaded even when Codex starts from the repository root.
-
 ## Physical folder map
 
-Replace these examples with exact repository paths:
-
 | Role | Physical folder |
-|---|---|
+| --- | --- |
 | Package sources | `Sources/LexiconKit/` |
 | DocC catalog | `Sources/LexiconKit/LexiconKit.docc/` |
 | Unit tests | `Tests/LexiconKitTests/` |
@@ -123,4 +102,4 @@ Replace these examples with exact repository paths:
 
 - Do not encode CEFR, product progression, CloudKit, or application-specific deduplication policy.
 - Store only opaque host-owned media references, never framework image objects or temporary URLs.
-- LexiconKit currently emits no runtime diagnostics because its public surface contains only pure domain values and initializers. Do not log value construction or vocabulary content. If a stateful or fallible lifecycle is added, route its diagnostics through a package-local `LexiconLogging` gateway with subsystem `com.thatfactory.lexiconkit` and canonical emoji 📖.
+- Model open success and failure are logged through `LexiconLogging` with subsystem `com.thatfactory.lexiconkit` and canonical emoji 📖. Never log model paths, lookup terms, glosses, or vocabulary content.
