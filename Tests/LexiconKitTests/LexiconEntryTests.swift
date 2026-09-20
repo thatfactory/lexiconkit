@@ -4,6 +4,78 @@ import Testing
 @testable import LexiconKit
 
 struct LexiconEntryTests {
+    @Test func legacyEntryWithoutGrammaticalGenderDecodesWithNil() throws {
+        let payload = Data(
+            #"{"createdAt":0,"definitions":[],"id":"D2E60778-E44B-48BE-B539-268D1F15229A","modifiedAt":0,"tags":[],"term":{"languageCode":"de","text":"Haus"}}"#
+                .utf8
+        )
+
+        let entry = try JSONDecoder().decode(LexiconEntry.self, from: payload)
+
+        #expect(entry.term.text == "Haus")
+        #expect(entry.term.grammaticalGender == nil)
+    }
+
+    @Test(
+        "Every supported grammatical gender round-trips",
+        arguments: [
+            LexiconGrammaticalGender.feminine,
+            .masculine,
+            .neuter,
+        ]
+    )
+    func grammaticalGenderRoundTrips(_ gender: LexiconGrammaticalGender) throws {
+        let term = LexiconTerm(
+            text: "Haus",
+            languageCode: "de",
+            grammaticalGender: gender
+        )
+
+        let data = try JSONEncoder().encode(term)
+        let decoded = try JSONDecoder().decode(LexiconTerm.self, from: data)
+
+        #expect(decoded == term)
+        #expect(decoded.grammaticalGender == gender)
+    }
+
+    @Test func existingInitializerDefaultsGrammaticalGenderToNil() {
+        let term = LexiconTerm(text: "laufen", languageCode: "de")
+
+        #expect(term.grammaticalGender == nil)
+    }
+
+    @Test func equalityAndHashingIncludeGrammaticalGender() {
+        let masculine = LexiconTerm(
+            text: "See",
+            languageCode: "de",
+            grammaticalGender: .masculine
+        )
+        let feminine = LexiconTerm(
+            text: "See",
+            languageCode: "de",
+            grammaticalGender: .feminine
+        )
+
+        #expect(masculine != feminine)
+        #expect(Set([masculine, feminine]).count == 2)
+    }
+
+    @Test func legacyDecoderIgnoresNewGrammaticalGenderKey() throws {
+        let entry = LexiconEntry(
+            term: LexiconTerm(
+                text: "Haus",
+                languageCode: "de",
+                grammaticalGender: .neuter
+            ),
+            definitions: []
+        )
+
+        let data = try JSONEncoder().encode(entry)
+        let legacyEntry = try JSONDecoder().decode(LegacyEntry.self, from: data)
+
+        #expect(legacyEntry.term == LegacyTerm(languageCode: "de", text: "Haus"))
+    }
+
     @Test func completeEntryRoundTripsThroughCodable() throws {
         // Given
         let entryID = UUID(uuidString: "D2E60778-E44B-48BE-B539-268D1F15229A")!
@@ -87,4 +159,19 @@ struct LexiconEntryTests {
         #expect(entry.modifiedAt == modifiedAt)
         #expect(entry.definitions.map(\.text) == ["book"])
     }
+}
+
+private struct LegacyTerm: Codable, Equatable {
+    var languageCode: String
+    var text: String
+}
+
+private struct LegacyEntry: Codable {
+    let id: UUID
+    var assetReference: LexiconAssetReference?
+    var createdAt: Date
+    var definitions: [LexiconDefinition]
+    var modifiedAt: Date
+    var tags: Set<LexiconTag>
+    var term: LegacyTerm
 }

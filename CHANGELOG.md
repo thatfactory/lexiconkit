@@ -13,6 +13,10 @@ All notable changes to LexiconKit are documented here.
 
 ## Unreleased
 
+### Added
+
+- Add optional, language-independent grammatical gender metadata to `LexiconTerm` with backward-compatible Codable behavior.
+
 ## 0.1.1 — 2026-09-13
 
 ### Changed
