@@ -2,6 +2,14 @@
 
 All notable changes to LexiconKit are documented here.
 
+## Unreleased
+
+## 0.2.0 — 2026-09-20
+
+### Added
+
+- Add optional, language-independent grammatical gender metadata to `LexiconTerm` with backward-compatible Codable behavior.
+
 ## 0.1.2 — 2026-09-19
 
 ### Changed
@@ -9,13 +17,6 @@ All notable changes to LexiconKit are documented here.
 - Adopted Agent Guidelines `0.0.33` and the Swift package compiler-settings baseline.
 - Declared Swift 6, warnings as errors, and the required upcoming language features for every package target.
 - Made imports and existential types explicit where required by the stricter compiler policy without intentionally changing runtime behavior.
-
-
-## Unreleased
-
-### Added
-
-- Add optional, language-independent grammatical gender metadata to `LexiconTerm` with backward-compatible Codable behavior.
 
 ## 0.1.1 — 2026-09-13
 
